@@ -70,10 +70,6 @@ http://<VM_PUBLIC_IP>
 
 ## 4. Screenshots
 
-> **All screenshots below are mandatory for assessment verification.**
-
----
-
 ### 4.1 CI/CD Pipeline Configuration & Execution
 
 ![Pipeline Run](screenshots/cicd-run.png)
