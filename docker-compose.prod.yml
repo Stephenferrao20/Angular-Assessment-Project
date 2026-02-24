@@ -1,0 +1,36 @@
+version: "1.0.0"
+
+services:
+  mongo:
+    image: mongo:6
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    image: stephenferrao0/angular-backend:latest
+    restart: always
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/dd_db
+    depends_on:
+      - mongo
+
+  frontend:
+    image: stephenferrao0/angular-frontend:latest
+    restart: always
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:1.25-alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  mongo-data:
